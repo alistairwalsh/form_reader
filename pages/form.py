@@ -1,6 +1,8 @@
 import streamlit as st
 from pdf2image import convert_from_path, convert_from_bytes
 
+st.image(uploaded_file)
+
 uploaded_file = st.file_uploader('Choose your .pdf file', type="pdf")
 st.write(uploaded_file)
 if uploaded_file is not None:
