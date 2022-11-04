@@ -3,8 +3,7 @@ from pdf2image import convert_from_path, convert_from_bytes
 
 uploaded_file = st.file_uploader('Choose your .pdf file', type="pdf")
 if uploaded_file is not None:
-    with open(uploaded_file, 'rb') as infile:
-        images = convert_from_bytes(infile.read())
+        images = convert_from_bytes(uploaded_file.read())
 
 
 # def extract_data(feed):
