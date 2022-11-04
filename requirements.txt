@@ -4,4 +4,3 @@ google-cloud-vision
 handprint
 pdf2image
 opencv_python_headless
-poppler
