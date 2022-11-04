@@ -16,6 +16,7 @@ if uploaded_file is not None:
             data = pytesseract.image_to_data(page, output_type=Output.DICT)
             keys = list(data.keys())
             st.write(keys)
+            st.write(data['text'])
 
 
 # def extract_data(feed):
