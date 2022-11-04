@@ -13,6 +13,7 @@ if uploaded_file is not None:
         for page in images:
             st.image(page, use_column_width=True)
             data = pytesseract.image_to_data(page) #, output_type=Output.DICT
+            st.write(data)
 
 
 # def extract_data(feed):
