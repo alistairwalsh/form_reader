@@ -17,6 +17,7 @@ if uploaded_file is not None:
             keys = list(data.keys())
             st.write(keys)
             st.write(data['text'])
+            break
 
 
 # def extract_data(feed):
