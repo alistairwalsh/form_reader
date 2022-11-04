@@ -1,5 +1,7 @@
 import streamlit as st
 from pdf2image import convert_from_path, convert_from_bytes
+from PIL import Image
+import pytesseract
 
 
 
@@ -10,6 +12,7 @@ if uploaded_file is not None:
         images = convert_from_bytes(uploaded_file.read())
         for page in images:
             st.image(page, use_column_width=True)
+            data = pytesseract.image_to_data(page) #, output_type=Output.DICT
 
 
 # def extract_data(feed):
