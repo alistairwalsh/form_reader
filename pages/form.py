@@ -20,7 +20,7 @@ if uploaded_file is not None:
             st.dataframe(data)
             rehab = data.loc[26,['left','top','width','height','text']]
             st.write(rehab)
-            cv2.rectangle(opencv_image, (rehab['left'], 10), (100, 100), (0, 255, 0))
+            cv2.rectangle(opencv_image, (rehab['left'], rehab['top']), (rehab['width'], rehab['height']), (0, 255, 0))
             st.image(opencv_image, channels="BGR")
             break
 
