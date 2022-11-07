@@ -18,8 +18,9 @@ if uploaded_file is not None:
             
             data = pytesseract.image_to_data(page, output_type=Output.DATAFRAME)
             st.dataframe(data)
-            st.write(data.loc[26,['left','top','width','height','text']])
-            cv2.rectangle(opencv_image, (10, 10), (100, 100), (0, 255, 0))
+            rehab = data.loc[26,['left','top','width','height','text']]
+            st.write(rehab)
+            cv2.rectangle(opencv_image, (rehab['left'], 10), (100, 100), (0, 255, 0))
             st.image(opencv_image, channels="BGR")
             break
 
