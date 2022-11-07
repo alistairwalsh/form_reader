@@ -15,8 +15,9 @@ if uploaded_file is not None:
         for page in images:
             st.image(page, use_column_width=True)
             data = pytesseract.image_to_data(page, output_type=Output.DICT)
+            boxes_data = pytesseract.image_to_boxes(page)
             keys = list(data.keys())
             st.write(keys)
             #st.write(data['text'])
-            st.write(data["block_num"][0])
+            st.write(boxes_data)
             break
