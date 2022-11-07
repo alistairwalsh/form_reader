@@ -17,6 +17,7 @@ if uploaded_file is not None:
             data = pytesseract.image_to_data(page, output_type=Output.DICT)
             boxes_data = pytesseract.image_to_boxes(page)
             keys = list(data.keys())
+            boxes_keys = list(boxes_data.keys())
             st.write(keys)
             #st.write(data['text'])
             st.write(boxes_data)
