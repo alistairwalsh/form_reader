@@ -15,10 +15,12 @@ if uploaded_file is not None:
         for page in images:
             opencv_image = np.array(page)
             st.image(page, use_column_width=True)
-            cv2.rectangle(opencv_image, (10, 10), (100, 100), (0, 255, 0))
-            st.image(opencv_image, channels="BGR")
+            
             data = pytesseract.image_to_data(page, output_type=Output.DATAFRAME)
             st.dataframe(data)
+            st.write(data.loc(1))
+            cv2.rectangle(opencv_image, (10, 10), (100, 100), (0, 255, 0))
+            st.image(opencv_image, channels="BGR")
             break
 
 
