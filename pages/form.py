@@ -17,13 +17,6 @@ if uploaded_file is not None:
             data = pytesseract.image_to_data(page, output_type=Output.DICT)
             keys = list(data.keys())
             st.write(keys)
-            st.write(data['text'])
-            break
-
-if uploaded_file is not None:
-        images = convert_from_bytes(uploaded_file.read())
-        for page in images:
-            st.image(page, use_column_width=True)
-            data = pytesseract.image_to_data(page, output_type=Output.DICT)
+            #st.write(data['text'])
             st.write(data["block_num"][1])
             break
