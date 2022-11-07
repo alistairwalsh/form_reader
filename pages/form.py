@@ -12,10 +12,8 @@ st.write(uploaded_file)
 
 if uploaded_file is not None:
         images = convert_from_bytes(uploaded_file.read())
-        st.write(type(images[0]))
         for page in images:
-            file_bytes = np.asarray(bytearray(uploaded_file.read()), dtype=np.uint8)
-            opencv_image = cv2.imdecode(file_bytes, 1)
+            open_cv_image = numpy.array(page)
             st.image(page, use_column_width=True)
             st.image(opencv_image, channels="BGR")
             data = pytesseract.image_to_data(page, output_type=Output.DATAFRAME)
