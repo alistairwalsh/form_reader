@@ -14,11 +14,11 @@ if uploaded_file is not None:
         images = convert_from_bytes(uploaded_file.read())
         for page in images:
             st.image(page, use_column_width=True)
-            data = pytesseract.image_to_data(page, output_type=Output.DICT)
-            boxes_data = pytesseract.image_to_boxes(page)
-            keys = list(data.keys())
-            boxes_keys = list(boxes_data.keys())
-            st.write(keys)
+            data = pytesseract.image_to_data(page, output_type=Output.DATAFRAME)
+            #boxes_data = pytesseract.image_to_boxes(page)
+            #keys = list(data.keys())
+            #boxes_keys = list(boxes_data.keys())
+            st.dataframe(data)
             #st.write(data['text'])
-            st.write(boxes_data)
+            #st.write(boxes_data)
             break
