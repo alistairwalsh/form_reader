@@ -13,7 +13,7 @@ st.write(uploaded_file)
 if uploaded_file is not None:
         images = convert_from_bytes(uploaded_file.read())
         for page in images:
-            file_bytes = np.asarray(bytearray(page), dtype=np.uint8)
+            file_bytes = np.asarray(bytearray(uploaded_file.read()), dtype=np.uint8)
             opencv_image = cv2.imdecode(file_bytes, 1)
             st.image(page, use_column_width=True)
             st.image(opencv_image, channels="BGR")
