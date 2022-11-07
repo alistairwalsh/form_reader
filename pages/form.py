@@ -28,8 +28,8 @@ if uploaded_file is not None:
 
 df = pd.DataFrame({'a':[1,2,3,4],'b':[11,22,33,44], 'c':[111,222,333,444]})
 
-for row in df:
-    st.write(row)
+for a,b,c in df[['a','b','c']]:
+    st.write(a,b,c)
 
 # if uploaded_file is not None:
 #     # Convert the file to an opencv image.
