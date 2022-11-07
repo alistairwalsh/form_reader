@@ -1,3 +1,4 @@
+import pandas as pd
 import streamlit as st
 from pdf2image import convert_from_path, convert_from_bytes
 from PIL import Image
@@ -25,6 +26,10 @@ if uploaded_file is not None:
             st.image(opencv_image, channels="BGR")
             break
 
+df = pd.DataFrame({'a':[1,2,3,4],'b':[11,22,33,44], 'c':[111,222,333,444]})
+
+for row in df:
+    st.write(row)
 
 # if uploaded_file is not None:
 #     # Convert the file to an opencv image.
