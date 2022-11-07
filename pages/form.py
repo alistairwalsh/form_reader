@@ -4,7 +4,7 @@ from PIL import Image
 import pytesseract
 from pytesseract import Output
 import cv2
-
+import numpy as np
 
 
 uploaded_file = st.file_uploader('Choose your .pdf file', type="pdf")
@@ -13,15 +13,19 @@ st.write(uploaded_file)
 if uploaded_file is not None:
         images = convert_from_bytes(uploaded_file.read())
         for page in images:
+            file_bytes = np.asarray(bytearray(page), dtype=np.uint8)
+            opencv_image = cv2.imdecode(file_bytes, 1)
             st.image(page, use_column_width=True)
-            img = cv2.imread(page)
-
+            st.image(opencv_image, channels="BGR")
             data = pytesseract.image_to_data(page, output_type=Output.DATAFRAME)
-            #boxes_data = pytesseract.image_to_boxes(page)
-            #keys = list(data.keys())
-            #boxes_keys = list(boxes_data.keys())
             st.dataframe(data)
-            #st.write(data['text'])
-            #st.write(boxes_data)
-            st.image(cv2.rectangle(img, (10, 10), (100, 100), (0, 255, 0)))
             break
+
+
+# if uploaded_file is not None:
+#     # Convert the file to an opencv image.
+#     file_bytes = np.asarray(bytearray(uploaded_file.read()), dtype=np.uint8)
+#     opencv_image = cv2.imdecode(file_bytes, 1)
+
+#     # Now do something with the image! For example, let's display it:
+#     st.image(opencv_image, channels="BGR")
