@@ -14,6 +14,7 @@ if uploaded_file is not None:
         images = convert_from_bytes(uploaded_file.read())
         for page in images:
             st.image(page, use_column_width=True)
+            img = cv2.imread(page)
 
             data = pytesseract.image_to_data(page, output_type=Output.DATAFRAME)
             #boxes_data = pytesseract.image_to_boxes(page)
@@ -22,5 +23,5 @@ if uploaded_file is not None:
             st.dataframe(data)
             #st.write(data['text'])
             #st.write(boxes_data)
-            st.image(cv2.rectangle(page, (10, 10), (100, 100), (0, 255, 0)))
+            st.image(cv2.rectangle(img, (10, 10), (100, 100), (0, 255, 0)))
             break
