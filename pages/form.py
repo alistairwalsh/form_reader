@@ -18,5 +18,5 @@ if uploaded_file is not None:
             keys = list(data.keys())
             st.write(keys)
             #st.write(data['text'])
-            st.write(data["block_num"][0][0])
+            st.write(data["block_num"][0])
             break
