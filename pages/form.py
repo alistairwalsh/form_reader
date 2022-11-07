@@ -21,7 +21,7 @@ if uploaded_file is not None:
             rehab = data.loc[26,['left','top','width','height','text']]
             #(x, y), (x + w, y + h)
             st.write(rehab)
-            cv2.rectangle(opencv_image, (rehab['left'], rehab['top']), (rehab['left'] + rehab['width'], rehab['top'] + rehab['height']), (0, 255, 0))
+            cv2.rectangle(opencv_image, (rehab['left'], rehab['top']), (rehab['left'] + rehab['width'], rehab['top'] + rehab['height']), (36,255,12), 2)
             st.image(opencv_image, channels="BGR")
             break
 
