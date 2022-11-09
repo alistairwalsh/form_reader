@@ -14,7 +14,8 @@ st.write(uploaded_file)
 def draw_bounding(opencv_image, data_df):
     '''Takes an image and a dataframe with coordinates and text and outputs the modified image'''
     for x, y, w, h, t in data_df[['left','top','width','height','text']].itertuples(index = False):
-        cv2.rectangle(opencv_image, (x,y), (x + w), (y + h), (36,255,12), 2)
+        st.write(x,y,w,h,t)
+        cv2.rectangle(opencv_image, (x,y), (x + w, y + h), (36,255,12), 2)
         cv2.putText(opencv_image, t, (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (36,255,12), 2)
     return opencv_image
 
