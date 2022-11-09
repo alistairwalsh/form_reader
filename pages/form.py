@@ -34,7 +34,6 @@ if uploaded_file is not None:
             #st.write(rehab)
             #cv2.rectangle(opencv_image, (rehab['left'], rehab['top']), (rehab['left'] + rehab['width'], rehab['top'] + rehab['height']), (36,255,12), 2)
             st.image(img, channels="BGR")
-            break
 
 #df = pd.DataFrame({'a':[1,2,3,4],'b':[11,22,33,44], 'c':[111,222,333,444]})
 
