@@ -14,7 +14,7 @@ st.write(uploaded_file)
 def draw_bounding(opencv_image, data_df):
     '''Takes an image and a dataframe with coordinates and text and outputs the modified image'''
     for x, y, w, h, t in data_df[['left','top','width','height','text']].itertuples(index = False):
-        st.write(x,y,w,h,t)
+        #st.write(x,y,w,h,t)
         cv2.rectangle(opencv_image, (x,y), (x + w, y + h), (36,255,12), 2)
         cv2.putText(opencv_image, str(t), (x, y-6), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0,0,255), 1)
     return opencv_image
@@ -23,7 +23,7 @@ if uploaded_file is not None:
         images = convert_from_bytes(uploaded_file.read())
         for page in images:
             opencv_image = np.array(page)
-            st.image(page, use_column_width=True)
+            #st.image(page, use_column_width=True)
             
             data_df = pytesseract.image_to_data(page, output_type=Output.DATAFRAME)
             st.dataframe(data_df)
