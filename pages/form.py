@@ -16,7 +16,7 @@ def draw_bounding(opencv_image, data_df):
     for x, y, w, h, t in data_df[['left','top','width','height','text']].itertuples(index = False):
         st.write(x,y,w,h,t)
         cv2.rectangle(opencv_image, (x,y), (x + w, y + h), (36,255,12), 2)
-        cv2.putText(opencv_image, t, (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (36,255,12), 2)
+        cv2.putText(opencv_image, str(t), (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (36,255,12), 2)
     return opencv_image
 
 if uploaded_file is not None:
