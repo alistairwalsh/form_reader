@@ -4,6 +4,7 @@ from google.cloud import documentai_v1 as documentai
 import os
 
 file = st.file_uploader('Choose your .pdf file', type="pdf")
+
 def online_process(
     project_id: str,
     location: str,
@@ -26,9 +27,9 @@ def online_process(
     resource_name = documentai_client.processor_path(project_id, location, processor_id)
 
     # Read the file into memory
-    with  open(file) as uploaded_file:
+    with  open(file.getvalue()) as uploaded_file:
         if uploaded_file is not None:
-            image_content = uploaded_file.getvalue()
+            image_content = uploaded_file
 
             # Load Binary Data into Document AI RawDocument Object
             raw_document = documentai.RawDocument(
