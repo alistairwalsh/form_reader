@@ -27,7 +27,7 @@ def online_process(
     resource_name = documentai_client.processor_path(project_id, location, processor_id)
 
     # Read the file into memory
-    with  open(file.getvalue()) as uploaded_file:
+    with  file.getvalue() as uploaded_file:
         if uploaded_file is not None:
             image_content = uploaded_file
 
