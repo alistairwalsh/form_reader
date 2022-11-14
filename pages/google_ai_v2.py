@@ -1,11 +1,24 @@
-import pandas as pd
-import streamlit as st
 from google.cloud import documentai_v1 as documentai
-import os
 from PIL import Image, ImageDraw
+import streamlit as st
 
-#file = st.file_uploader('Choose your .pdf file', type="pdf")
-file_path = 'JA_22.07.19_small.pdf'
+import os
+import pandas as pd
+
+# PROJECT_ID = "YOUR_PROJECT_ID_HERE"
+# LOCATION = "us"  # Format is 'us' or 'eu'
+# PROCESSOR_ID = "PROCESSOR_ID"  # Create processor in Cloud Console
+# PDF_PATH = "../resources/procurement/invoices/invoice.pdf" # Update to path of target document
+
+### use os to set environment variables under the name? GOOGLE_APPLICATION_CREDENTIALS
+### st.secrets["GOOGLE_APPLICATION_CREDENTIALS"]
+
+PROJECT_ID = st.secrets["google_document_ai"]["PROJECT_ID"]
+LOCATION = st.secrets["google_document_ai"]["LOCATION"]
+PROCESSOR_ID = st.secrets["google_document_ai"]["PROCESSOR_ID"]
+PDF_PATH = 'JA_22.07.19_small.pdf'
+MIME_TYPE = "application/pdf"
+
 
 def online_process(
     project_id: str,
@@ -29,24 +42,23 @@ def online_process(
     resource_name = documentai_client.processor_path(project_id, location, processor_id)
 
     # Read the file into memory
-    with  open(file_path) as uploaded_file:
-        if uploaded_file is not None:
-            image_content = uploaded_file
+    with open(file_path, "rb") as image:
+        image_content = image.read()
 
-            # Load Binary Data into Document AI RawDocument Object
-            raw_document = documentai.RawDocument(
-                content=image_content, mime_type=mime_type
-            )
+        # Load Binary Data into Document AI RawDocument Object
+        raw_document = documentai.RawDocument(
+            content=image_content, mime_type=mime_type
+        )
 
-            # Configure the process request
-            request = documentai.ProcessRequest(
-                name=resource_name, raw_document=raw_document
-            )
+        # Configure the process request
+        request = documentai.ProcessRequest(
+            name=resource_name, raw_document=raw_document
+        )
 
-            # Use the Document AI client to process the sample form
-            result = documentai_client.process_document(request=request)
+        # Use the Document AI client to process the sample form
+        result = documentai_client.process_document(request=request)
 
-            return result.document
+        return result.document
 
 
 def trim_text(text: str):
@@ -55,29 +67,11 @@ def trim_text(text: str):
     """
     return text.strip().replace("\n", " ")
 
-
-# PROJECT_ID = "YOUR_PROJECT_ID"
-# LOCATION = "YOUR_PROJECT_LOCATION"  # Format is 'us' or 'eu'
-# PROCESSOR_ID = "FORM_PARSER_ID"  # Create processor in Cloud Console
-
-PROJECT_ID = st.secrets["google_document_ai"]["PROJECT_ID"]
-LOCATION = st.secrets["google_document_ai"]["LOCATION"]
-PROCESSOR_ID = st.secrets["google_document_ai"]["PROCESSOR_ID"]
-
-
-
-
-# The local file in your current working directory
-FILE_PATH = "form.pdf"
-# Refer to https://cloud.google.com/document-ai/docs/processors-list
-# for supported file types
-MIME_TYPE = "application/pdf"
-
 document = online_process(
     project_id=PROJECT_ID,
     location=LOCATION,
     processor_id=PROCESSOR_ID,
-    file_path=FILE_PATH,
+    file_path=PDF_PATH,
     mime_type=MIME_TYPE,
 )
 
