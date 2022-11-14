@@ -3,4 +3,4 @@ import os
 
 st.write(st.secrets["test"])
 
-st.write(os.environ["test"])
+st.write(os.environ["test"]["test_name"])
