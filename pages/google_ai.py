@@ -3,7 +3,7 @@ import streamlit as st
 from google.cloud import documentai_v1 as documentai
 import os
 
-
+file = st.file_uploader('Choose your .pdf file', type="pdf")
 def online_process(
     project_id: str,
     location: str,
@@ -26,7 +26,7 @@ def online_process(
     resource_name = documentai_client.processor_path(project_id, location, processor_id)
 
     # Read the file into memory
-    with st.file_uploader('Choose your .pdf file', type="pdf") as uploaded_file:
+    with  open(file) as uploaded_file:
         image_content = uploaded_file.read()
 
         # Load Binary Data into Document AI RawDocument Object
