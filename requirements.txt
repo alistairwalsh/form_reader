@@ -5,3 +5,4 @@ handprint
 pdf2image
 opencv_python_headless
 pytesseract
+google-cloud-documentai
