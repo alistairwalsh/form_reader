@@ -1,5 +1,7 @@
 import pandas as pd
+import streamlit as st
 from google.cloud import documentai_v1 as documentai
+import os
 
 
 def online_process(
@@ -24,8 +26,8 @@ def online_process(
     resource_name = documentai_client.processor_path(project_id, location, processor_id)
 
     # Read the file into memory
-    with open(file_path, "rb") as image:
-        image_content = image.read()
+    with st.file_uploader('Choose your .pdf file', type="pdf") as uploaded_file:
+        image_content = uploaded_file.read()
 
         # Load Binary Data into Document AI RawDocument Object
         raw_document = documentai.RawDocument(
@@ -50,9 +52,16 @@ def trim_text(text: str):
     return text.strip().replace("\n", " ")
 
 
-PROJECT_ID = "YOUR_PROJECT_ID"
-LOCATION = "YOUR_PROJECT_LOCATION"  # Format is 'us' or 'eu'
-PROCESSOR_ID = "FORM_PARSER_ID"  # Create processor in Cloud Console
+# PROJECT_ID = "YOUR_PROJECT_ID"
+# LOCATION = "YOUR_PROJECT_LOCATION"  # Format is 'us' or 'eu'
+# PROCESSOR_ID = "FORM_PARSER_ID"  # Create processor in Cloud Console
+
+PROJECT_ID = st.secrets[google_document_ai]["PROJECT_ID"]
+LOCATION = st.secrets[google_document_ai]["LOCATION"]
+PROCESSOR_ID = st.secrets[google_document_ai]["PROCESSOR_ID"]
+
+
+
 
 # The local file in your current working directory
 FILE_PATH = "form.pdf"
@@ -93,4 +102,4 @@ df = pd.DataFrame(
     }
 )
 
-print(df)
+st.dataframe(df)
