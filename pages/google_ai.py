@@ -56,9 +56,9 @@ def trim_text(text: str):
 # LOCATION = "YOUR_PROJECT_LOCATION"  # Format is 'us' or 'eu'
 # PROCESSOR_ID = "FORM_PARSER_ID"  # Create processor in Cloud Console
 
-PROJECT_ID = st.secrets[google_document_ai]["PROJECT_ID"]
-LOCATION = st.secrets[google_document_ai]["LOCATION"]
-PROCESSOR_ID = st.secrets[google_document_ai]["PROCESSOR_ID"]
+PROJECT_ID = st.secrets["google_document_ai"]["PROJECT_ID"]
+LOCATION = st.secrets["google_document_ai"]["LOCATION"]
+PROCESSOR_ID = st.secrets["google_document_ai"]["PROCESSOR_ID"]
 
 
 
