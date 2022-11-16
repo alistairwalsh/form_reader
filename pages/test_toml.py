@@ -3,4 +3,6 @@ import os
 
 st.write(st.secrets["test"])
 
-st.write(os.environ["test"] == os.environ["test"])
+result = os.environ["test"]
+
+st.write( result)
