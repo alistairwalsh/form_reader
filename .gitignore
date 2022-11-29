@@ -2,3 +2,7 @@
 *.zip
 secrets.toml
 ideas-grant-ocr-a2bf3d1d1d35.json
+home_send.py
+toml.ipynb
+.ipynb_checkpoints/toml-checkpoint.ipynb
+*.ipynb_checkpoints
