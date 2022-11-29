@@ -1,6 +1,5 @@
 import streamlit as st
 from google.oauth2 import service_account
-from google.cloud import storage
 from google.cloud import documentai_v1 as documentai
 from PIL import Image, ImageDraw
 
