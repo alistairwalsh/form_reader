@@ -77,6 +77,14 @@ if uploaded_file is not None:
         mime_type=MIME_TYPE,
     )
 
+    st.download_button(
+    "Press to Download Document Data",
+    document,
+    "file.json",
+    "application/json",
+    key='download-json'
+    )
+
     names = []
     name_confidence = []
     values = []
