@@ -79,7 +79,7 @@ if uploaded_file is not None:
 
     st.download_button(
     "Press to Download Document Data",
-    document,
+    document.pages[0],
     "file.json",
     key='download-json'
     )
