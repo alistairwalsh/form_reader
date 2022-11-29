@@ -81,7 +81,6 @@ if uploaded_file is not None:
     "Press to Download Document Data",
     document,
     "file.json",
-    "binary_contents",
     key='download-json'
     )
 
