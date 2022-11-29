@@ -40,23 +40,22 @@ def online_process(
     resource_name = documentai_client.processor_path(project_id, location, processor_id)
 
     # Read the file into memory
-    with open(file_path, "rb") as image:
-        image_content = image.read()
+    image_content = uploaded_file.read()
 
-        # Load Binary Data into Document AI RawDocument Object
-        raw_document = documentai.RawDocument(
-            content=image_content, mime_type=mime_type
-        )
+    # Load Binary Data into Document AI RawDocument Object
+    raw_document = documentai.RawDocument(
+        content=image_content, mime_type=mime_type
+    )
 
-        # Configure the process request
-        request = documentai.ProcessRequest(
-            name=resource_name, raw_document=raw_document
-        )
+    # Configure the process request
+    request = documentai.ProcessRequest(
+        name=resource_name, raw_document=raw_document
+    )
 
-        # Use the Document AI client to process the sample form
-        result = documentai_client.process_document(request=request)
+    # Use the Document AI client to process the sample form
+    result = documentai_client.process_document(request=request)
 
-        return result.document
+    return result.document
 
 def trim_text(text: str):
     """
