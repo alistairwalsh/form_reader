@@ -6,6 +6,10 @@ import pandas as pd
 
 uploaded_file = st.file_uploader('Choose your .pdf file', type="pdf")
 
+@st.experimental_memo
+def convert_df(df):
+   return df.to_csv(index=False).encode('utf-8')
+
 
 PROJECT_ID = st.secrets["google_document_ai"]["PROJECT_ID"]
 LOCATION = st.secrets["google_document_ai"]["LOCATION"]
@@ -100,17 +104,12 @@ if uploaded_file is not None:
 
     st.dataframe(df)
 
-@st.experimental_memo
-def convert_df(df):
-   return df.to_csv(index=False).encode('utf-8')
+    csv = convert_df(df)
 
-
-csv = convert_df(df)
-
-st.download_button(
-   "Press to Download",
-   csv,
-   "file.csv",
-   "text/csv",
-   key='download-csv'
-)
+    st.download_button(
+    "Press to Download",
+    csv,
+    "file.csv",
+    "text/csv",
+    key='download-csv'
+    )
