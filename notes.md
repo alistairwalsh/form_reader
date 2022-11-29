@@ -22,3 +22,24 @@ https://codelabs.developers.google.com/codelabs/docai-form-parser-v1-python#4
 
 
 https://github.com/googleapis/python-documentai
+
+
+# uptraining a processor
+https://cloud.google.com/document-ai/docs/workbench/uptrain-processor
+
+# form parser specs
+https://cloud.google.com/document-ai/docs/processors-list#processor_form-parser
+
+# article on using form parser
+https://www.crosstab.io/articles/google-form-parser-review/
+
+# This gives key/value pairs
+https://levelup.gitconnected.com/how-to-parse-forms-using-google-cloud-document-ai-68ad47e1c0ed
+
+# items in responce from google document ai
+
+https://cloud.google.com/document-ai/docs/reference/rpc/google.cloud.documentai.v1beta2#formfield
+
+
+# explicit authentication
+https://googleapis.dev/python/google-api-core/latest/auth.html
