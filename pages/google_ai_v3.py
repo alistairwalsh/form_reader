@@ -6,7 +6,7 @@ from PIL import Image, ImageDraw
 PROJECT_ID = st.secrets["google_document_ai"]["PROJECT_ID"]
 LOCATION = st.secrets["google_document_ai"]["LOCATION"]
 PROCESSOR_ID = st.secrets["google_document_ai"]["PROCESSOR_ID"]
-PDF_PATH = 'JA_22.07.19_small.pdf'
+PDF_PATH = '..\JA_22.07.19_small.pdf'
 MIME_TYPE = "application/pdf"
 
 # Create API client.
