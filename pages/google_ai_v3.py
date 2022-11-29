@@ -4,6 +4,9 @@ from google.cloud import documentai_v1 as documentai
 from PIL import Image, ImageDraw
 import pandas as pd
 
+uploaded_file = st.file_uploader('Choose your .pdf file', type="pdf")
+
+
 PROJECT_ID = st.secrets["google_document_ai"]["PROJECT_ID"]
 LOCATION = st.secrets["google_document_ai"]["LOCATION"]
 PROCESSOR_ID = st.secrets["google_document_ai"]["PROCESSOR_ID"]
@@ -14,6 +17,7 @@ MIME_TYPE = "application/pdf"
 credentials = service_account.Credentials.from_service_account_info(
     st.secrets["GOOGLE_APPLICATION_CREDENTIALS"])
 
+@st.experimental_memo
 def online_process(
     project_id: str,
     location: str,
@@ -60,37 +64,39 @@ def trim_text(text: str):
     """
     return text.strip().replace("\n", " ")
 
-document = online_process(
-    project_id=PROJECT_ID,
-    location=LOCATION,
-    processor_id=PROCESSOR_ID,
-    file_path=PDF_PATH,
-    mime_type=MIME_TYPE,
-)
 
-names = []
-name_confidence = []
-values = []
-value_confidence = []
+if uploaded_file is not None:
+    document = online_process(
+        project_id=PROJECT_ID,
+        location=LOCATION,
+        processor_id=PROCESSOR_ID,
+        file_path=PDF_PATH,
+        mime_type=MIME_TYPE,
+    )
 
-for page in document.pages:
-    for field in page.form_fields:
-        # Get the extracted field names
-        names.append(trim_text(field.field_name.text_anchor.content))
-        # Confidence - How "sure" the Model is that the text is correct
-        name_confidence.append(field.field_name.confidence)
+    names = []
+    name_confidence = []
+    values = []
+    value_confidence = []
 
-        values.append(trim_text(field.field_value.text_anchor.content))
-        value_confidence.append(field.field_value.confidence)
+    for page in document.pages:
+        for field in page.form_fields:
+            # Get the extracted field names
+            names.append(trim_text(field.field_name.text_anchor.content))
+            # Confidence - How "sure" the Model is that the text is correct
+            name_confidence.append(field.field_name.confidence)
 
-# Create a Pandas Dataframe to print the values in tabular format.
-df = pd.DataFrame(
-    {
-        "Field Name": names,
-        "Field Name Confidence": name_confidence,
-        "Field Value": values,
-        "Field Value Confidence": value_confidence,
-    }
-)
+            values.append(trim_text(field.field_value.text_anchor.content))
+            value_confidence.append(field.field_value.confidence)
 
-st.dataframe(df)
+    # Create a Pandas Dataframe to print the values in tabular format.
+    df = pd.DataFrame(
+        {
+            "Field Name": names,
+            "Field Name Confidence": name_confidence,
+            "Field Value": values,
+            "Field Value Confidence": value_confidence,
+        }
+    )
+
+    st.dataframe(df)
