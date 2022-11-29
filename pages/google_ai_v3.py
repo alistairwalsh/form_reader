@@ -2,6 +2,7 @@ import streamlit as st
 from google.oauth2 import service_account
 from google.cloud import documentai_v1 as documentai
 from PIL import Image, ImageDraw
+import pandas as pd
 
 PROJECT_ID = st.secrets["google_document_ai"]["PROJECT_ID"]
 LOCATION = st.secrets["google_document_ai"]["LOCATION"]
