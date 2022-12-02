@@ -26,7 +26,7 @@ def online_process(
     project_id: str,
     location: str,
     processor_id: str,
-    file_path: str,
+    pdf_document,
     mime_type: str,
 ) -> documentai.Document:
     """
@@ -44,7 +44,7 @@ def online_process(
     resource_name = documentai_client.processor_path(project_id, location, processor_id)
 
     # Read the file into memory
-    image_content = uploaded_file.read()
+    image_content = pdf_document.read()
 
     # Load Binary Data into Document AI RawDocument Object
     raw_document = documentai.RawDocument(
@@ -73,7 +73,7 @@ if uploaded_file is not None:
         project_id=PROJECT_ID,
         location=LOCATION,
         processor_id=PROCESSOR_ID,
-        file_path=PDF_PATH,
+        pdf_document=uploaded_file,
         mime_type=MIME_TYPE,
     )
 
